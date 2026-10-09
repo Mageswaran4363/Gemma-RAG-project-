@@ -4,7 +4,7 @@ A small retrieval-augmented generation (RAG) app. Drop `.txt`, `.md` or `.pdf` f
 
 - **Retrieval:** `google/embeddinggemma-2`, using the model card's task prefixes (`SearchQuery` for questions, `title: … | text: …` for documents)
 - **Vector store:** a NumPy matrix with cosine similarity, so there is no database to install
-- **Answering:** `Qwen/Qwen2.5-0.5B-Instruct`, a small model that runs on CPU (change it with `GEN_MODEL` in `rag.py`)
+- **Answering:** `Qwen/Qwen2.5-3B-Instruct`, a small model that runs locally (change it with `GEN_MODEL` in `rag.py`)
 
 ## Run it
 

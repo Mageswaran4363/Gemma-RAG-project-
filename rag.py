@@ -13,7 +13,7 @@ from pathlib import Path
 import numpy as np
 
 EMBED_MODEL = "google/embeddinggemma-2"
-GEN_MODEL = "Qwen/Qwen2.5-0.5B-Instruct"  # small, ungated, runs on CPU; swap for any chat model
+GEN_MODEL = "Qwen/Qwen2.5-3B-Instruct"  # ungated, ~6 GB download; use Qwen2.5-0.5B-Instruct for a tiny/fast option
 EMBED_DIM = 768  # can be 512 / 256 / 128 thanks to Matryoshka truncation
 
 

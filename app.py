@@ -32,13 +32,25 @@ with st.sidebar:
         for f in files:
             (DOCS / f.name).write_bytes(f.getbuffer())
         st.success(f"Saved {len(files)} file(s). Rebuild the index.")
-    st.write(sorted(p.name for p in DOCS.glob("*") if p.is_file()))
+    pasted = st.text_area("…or paste text (e.g. a paper)", height=150)
+    paste_name = st.text_input("Name for pasted text", "pasted_paper")
+    if st.button("Save pasted text") and pasted.strip():
+        DOCS.mkdir(exist_ok=True)
+        (DOCS / f"{paste_name.strip() or 'pasted_paper'}.txt").write_text(pasted, encoding="utf-8")
+        st.success("Saved. Rebuild the index.")
+    present = sorted(p.name for p in DOCS.glob("*") if p.is_file())
+    st.write(present)
+    to_remove = st.multiselect("Remove documents", present)
+    if to_remove and st.button("Delete selected"):
+        for name in to_remove:
+            (DOCS / name).unlink(missing_ok=True)
+        st.success("Removed. Rebuild the index.")
     if st.button("Build / rebuild index", type="primary"):
         shutil.rmtree(INDEX, ignore_errors=True)
         with st.spinner("Embedding chunks…"):
             build_index(DOCS, get_embedder()).save(INDEX)
         st.success("Index ready")
-    k = st.slider("Passages to retrieve", 1, 10, 4)
+    k = st.slider("Passages to retrieve", 1, 10, 6)
     use_llm = st.toggle("Generate an answer", value=True,
                         help="Off = retrieval only (fast, no LLM download)")
 
