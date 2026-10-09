@@ -1,0 +1,9 @@
+sentence-transformers[image,audio,video]>=6.1
+# google/embeddinggemma-2 is not in a released transformers yet (5.19.0 fails); install from source
+transformers @ git+https://github.com/huggingface/transformers.git
+torch
+accelerate
+numpy
+pypdf
+streamlit
+watchdog
